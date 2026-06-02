@@ -7,6 +7,7 @@ import inheritance.Student;
 import polymorphism.Circle;
 import polymorphism.Rectangle;
 import polymorphism.Shape;
+import strings.StringHelper;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,5 +43,12 @@ public class Main {
             account.deposit(500);
             account.withdraw(200);
             System.out.println("Balance after operations: " + account.getBalance());
+
+            System.out.println("\nReverseString");
+            String myString = "myString";
+            StringHelper reverse = new StringHelper();
+            String reversedMyString = reverse.reverse(myString);
+            System.out.println("MyString: " + myString);
+            System.out.println("Reversed MyString: " + reversedMyString);
         }
     }
