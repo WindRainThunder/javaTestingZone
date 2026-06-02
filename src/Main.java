@@ -7,6 +7,7 @@ import inheritance.Student;
 import polymorphism.Circle;
 import polymorphism.Rectangle;
 import polymorphism.Shape;
+import strings.FirstUniqueCharacterProblem;
 import strings.PalindromeProblem;
 import strings.StringHelper;
 
@@ -58,6 +59,11 @@ public class Main {
             PalindromeProblem palindromeProblem = new PalindromeProblem();
             isPalindrome = palindromeProblem.isPalindrome(palindromeExample);
             System.out.println("Is " + palindromeExample + " palindrome? " + isPalindrome);
+
+
+            System.out.println("\nFirst Unique Character Prolbem");
+            FirstUniqueCharacterProblem firstUniqueCharacterProblem = new FirstUniqueCharacterProblem();
+            System.out.println(firstUniqueCharacterProblem.firstUniqueChar("ala ma kota a kot ma ale"));
 
         }
     }
