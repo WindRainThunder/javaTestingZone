@@ -7,6 +7,7 @@ import inheritance.Student;
 import polymorphism.Circle;
 import polymorphism.Rectangle;
 import polymorphism.Shape;
+import strings.PalindromeProblem;
 import strings.StringHelper;
 
 public class Main {
@@ -50,5 +51,13 @@ public class Main {
             String reversedMyString = reverse.reverse(myString);
             System.out.println("MyString: " + myString);
             System.out.println("Reversed MyString: " + reversedMyString);
+
+            System.out.println("\nPalindrome Prolbem");
+            Boolean isPalindrome;
+            String palindromeExample = "Alam";
+            PalindromeProblem palindromeProblem = new PalindromeProblem();
+            isPalindrome = palindromeProblem.isPalindrome(palindromeExample);
+            System.out.println("Is " + palindromeExample + " palindrome? " + isPalindrome);
+
         }
     }
