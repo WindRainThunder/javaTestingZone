@@ -1,3 +1,4 @@
+import QA.MergeIntervals;
 import QA.MostFrequentElement;
 import QA.TwoSumsProblem;
 import abstraction.classes.Bike;
@@ -74,6 +75,13 @@ public class Main {
             System.out.println("\nTwo Sums Problem");
             int[] numbersForTwoSum = {2, 7, 11, 15};
             System.out.println(Arrays.toString(TwoSumsProblem.twoSum(numbersForTwoSum, 8)));
+
+            System.out.println("\nMerge overlapping intervals");
+            int[][] input = {{1, 3}, {7, 10}, {2, 6}, {9, 12}};
+            int[][] result = MergeIntervals.merge(input);
+            for (int[] interval : result) {
+                    System.out.println(Arrays.toString(interval));
+            }
 
         }
     }
