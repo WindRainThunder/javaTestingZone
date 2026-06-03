@@ -1,6 +1,7 @@
 import QA.MergeIntervals;
 import QA.MostFrequentElement;
 import QA.TwoSumsProblem;
+import QA.ValidateBalancedBrackets;
 import abstraction.classes.Bike;
 import abstraction.classes.Car;
 import abstraction.interfaces.Vehicle;
@@ -82,6 +83,10 @@ public class Main {
             for (int[] interval : result) {
                     System.out.println(Arrays.toString(interval));
             }
+
+            System.out.println("\nValidate Balanced Brackets");
+            System.out.println(ValidateBalancedBrackets.isValid("{([[()]])}"));
+
 
         }
     }
