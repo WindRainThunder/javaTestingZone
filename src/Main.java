@@ -53,21 +53,18 @@ public class Main {
 
             System.out.println("\nReverseString");
             String myString = "myString";
-            StringHelper reverse = new StringHelper();
-            String reversedMyString = reverse.reverse(myString);
+            String reversedMyString = StringHelper.reverse(myString);
             System.out.println("MyString: " + myString);
             System.out.println("Reversed MyString: " + reversedMyString);
 
             System.out.println("\nPalindrome Prolbem");
-            Boolean isPalindrome;
+            boolean isPalindrome;
             String palindromeExample = "Alam";
-            PalindromeProblem palindromeProblem = new PalindromeProblem();
-            isPalindrome = palindromeProblem.isPalindrome(palindromeExample);
+            isPalindrome = PalindromeProblem.isPalindrome(palindromeExample);
             System.out.println("Is " + palindromeExample + " palindrome? " + isPalindrome);
 
             System.out.println("\nFirst Unique Character Prolbem");
-            FirstUniqueCharacterProblem firstUniqueCharacterProblem = new FirstUniqueCharacterProblem();
-            System.out.println(firstUniqueCharacterProblem.firstUniqueChar("ala ma kota a kot ma ale"));
+            System.out.println(FirstUniqueCharacterProblem.firstUniqueChar("ala ma kota a kot ma ale"));
 
             System.out.println("\nMost Frequent Element");
             MostFrequentElement mostFrequentElement = new MostFrequentElement();
