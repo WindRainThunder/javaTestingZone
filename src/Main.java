@@ -1,3 +1,4 @@
+import QA.MostFrequentElement;
 import abstraction.classes.Bike;
 import abstraction.classes.Car;
 import abstraction.interfaces.Vehicle;
@@ -10,6 +11,9 @@ import polymorphism.Shape;
 import strings.FirstUniqueCharacterProblem;
 import strings.PalindromeProblem;
 import strings.StringHelper;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -64,6 +68,11 @@ public class Main {
             System.out.println("\nFirst Unique Character Prolbem");
             FirstUniqueCharacterProblem firstUniqueCharacterProblem = new FirstUniqueCharacterProblem();
             System.out.println(firstUniqueCharacterProblem.firstUniqueChar("ala ma kota a kot ma ale"));
+
+            System.out.println("\nMost Frequent Element");
+            MostFrequentElement mostFrequentElement = new MostFrequentElement();
+            List<String> values = Arrays.asList("PASS", "FAIL", "PASS", "PASS", "ERROR", "ERROR");
+            System.out.println(mostFrequentElement.mostFrequent(values));
 
         }
     }
