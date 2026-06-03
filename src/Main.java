@@ -1,4 +1,5 @@
 import QA.MostFrequentElement;
+import QA.TwoSumsProblem;
 import abstraction.classes.Bike;
 import abstraction.classes.Car;
 import abstraction.interfaces.Vehicle;
@@ -64,7 +65,6 @@ public class Main {
             isPalindrome = palindromeProblem.isPalindrome(palindromeExample);
             System.out.println("Is " + palindromeExample + " palindrome? " + isPalindrome);
 
-
             System.out.println("\nFirst Unique Character Prolbem");
             FirstUniqueCharacterProblem firstUniqueCharacterProblem = new FirstUniqueCharacterProblem();
             System.out.println(firstUniqueCharacterProblem.firstUniqueChar("ala ma kota a kot ma ale"));
@@ -73,6 +73,10 @@ public class Main {
             MostFrequentElement mostFrequentElement = new MostFrequentElement();
             List<String> values = Arrays.asList("PASS", "FAIL", "PASS", "PASS", "ERROR", "ERROR");
             System.out.println(mostFrequentElement.mostFrequent(values));
+
+            System.out.println("\nTwo Sums Problem");
+            int[] numbersForTwoSum = {2, 7, 11, 15};
+            System.out.println(Arrays.toString(TwoSumsProblem.twoSum(numbersForTwoSum, 8)));
 
         }
     }
