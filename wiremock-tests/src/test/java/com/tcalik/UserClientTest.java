@@ -144,4 +144,42 @@ class UserClientTest {
 
         verify(getRequestedFor(urlEqualTo("/users/1")));
     }
+
+    @Test
+    void shouldSendAuthorizationHeader(WireMockRuntimeInfo wm) throws Exception {
+        stubFor(get(urlEqualTo("/users/1"))
+                .withHeader("Authorization", equalTo("Bearer test-token"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withBody("{\"id\":1,\"name\":\"Tomasz\"}")));
+
+        UserClient client = new UserClient(wm.getHttpBaseUrl());
+
+        ApiResponse response = client.getUserWithToken(1, "test-token");
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+        assertThat(response.getBody()).contains("Tomasz");
+
+        verify(getRequestedFor(urlEqualTo("/users/1"))
+                .withHeader("Authorization", equalTo("Bearer test-token")));
+    }
+
+    @Test
+    void shouldSendQueryParameter(WireMockRuntimeInfo wm) throws Exception {
+        stubFor(get(urlPathEqualTo("/users"))
+                .withQueryParam("id", equalTo("1"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withBody("{\"id\":1,\"name\":\"Tomasz\"}")));
+
+        UserClient client = new UserClient(wm.getHttpBaseUrl());
+
+        ApiResponse response = client.getUserByQueryParam(1);
+
+        assertThat(response.getStatusCode()).isEqualTo(200);
+        assertThat(response.getBody()).contains("Tomasz");
+
+        verify(getRequestedFor(urlPathEqualTo("/users"))
+                .withQueryParam("id", equalTo("1")));
+    }
 }

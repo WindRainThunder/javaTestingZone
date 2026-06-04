@@ -65,5 +65,34 @@ public class UserClient {
                 .statusCode();
     }
 
+    public ApiResponse getUserWithToken(int id, String token) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "/users/" + id))
+                .header("Authorization", "Bearer " + token)
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString()
+        );
+
+        return new ApiResponse(response.statusCode(), response.body());
+    }
+
+    public ApiResponse getUserByQueryParam(int id) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "/users?id=" + id))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString()
+        );
+
+        return new ApiResponse(response.statusCode(), response.body());
+    }
+
 
 }
