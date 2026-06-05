@@ -15,4 +15,8 @@ public class UserManager {
 
         return "User: " + user.getName();
     }
+
+    public String getDefaultDisplayName() {
+        return "Unknown User";
+    }
 }
