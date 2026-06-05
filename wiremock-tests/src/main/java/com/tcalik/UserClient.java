@@ -7,12 +7,17 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserClient implements UserService {
 
     private final HttpClient httpClient;
     private final String baseUrl;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private static final Logger log =
+            LoggerFactory.getLogger(UserClient.class);
 
 
 
@@ -35,8 +40,12 @@ public class UserClient implements UserService {
     }
 
     public ApiResponse getUserResponseById(int id) throws IOException, InterruptedException {
+        String url = baseUrl + "/users/" + id;
+
+        log.info("Calling user API: {}", url);
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/users/" + id))
+                .uri(URI.create(url))
                 .timeout(Duration.ofSeconds(1))
                 .GET()
                 .build();
@@ -45,6 +54,8 @@ public class UserClient implements UserService {
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
+
+        log.info("Received response with status code: {}", response.statusCode());
 
         return new ApiResponse(response.statusCode(), response.body());
     }

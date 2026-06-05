@@ -205,4 +205,29 @@ class UserClientTest {
         assertThat(user.getId()).isEqualTo(999);
         assertThat(user.getName()).isEqualTo("Mock User");
     }
+
+    @Test
+    void shouldCreateUserUsingBuilder() {
+
+        User user = User.builder()
+                .id(1)
+                .name("Tomasz")
+                .build();
+
+        assertThat(user.getId()).isEqualTo(1);
+        assertThat(user.getName()).isEqualTo("Tomasz");
+    }
+
+    @Test
+    void shouldCreateMockServiceUsingFactory() throws Exception {
+
+        UserService service =
+                UserServiceFactory.createMockService();
+
+        User user =
+                service.getUserObjectById(1);
+
+        assertThat(user.getName())
+                .isEqualTo("Mock User");
+    }
 }
