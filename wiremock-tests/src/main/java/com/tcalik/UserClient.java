@@ -8,11 +8,13 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserClient {
+public class UserClient implements UserService {
 
     private final HttpClient httpClient;
     private final String baseUrl;
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+
 
     public UserClient(String baseUrl) {
         this.httpClient = HttpClient.newBuilder()
@@ -47,6 +49,7 @@ public class UserClient {
         return new ApiResponse(response.statusCode(), response.body());
     }
 
+    @Override
     public User getUserObjectById(int id) throws IOException, InterruptedException {
         String responseBody = getUserById(id);
 

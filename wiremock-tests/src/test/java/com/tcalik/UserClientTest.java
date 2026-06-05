@@ -182,4 +182,27 @@ class UserClientTest {
         verify(getRequestedFor(urlPathEqualTo("/users"))
                 .withQueryParam("id", equalTo("1")));
     }
+
+    @Test
+    void shouldUsePolymorphism() throws Exception {
+
+        UserService service =
+                new MockUserService();
+
+        User user =
+                service.getUserObjectById(1);
+
+        assertThat(user.getName())
+                .isEqualTo("Mock User");
+    }
+
+    @Test
+    void shouldUseMockUserServiceThroughInterface() throws Exception {
+        UserService service = new MockUserService();
+
+        User user = service.getUserObjectById(1);
+
+        assertThat(user.getId()).isEqualTo(999);
+        assertThat(user.getName()).isEqualTo("Mock User");
+    }
 }
