@@ -26,4 +26,5 @@ jobs:
           java-version: 11
 
       - name: Run tests
+        working-directory: wiremock-tests
         run: mvn test
