@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @WireMockTest
 class UserClientTest {
@@ -229,5 +230,37 @@ class UserClientTest {
 
         assertThat(user.getName())
                 .isEqualTo("Mock User");
+    }
+
+    @Test
+    void shouldThrowUserNotFoundExceptionWhenUserDoesNotExist(WireMockRuntimeInfo wm) {
+        stubFor(get(urlEqualTo("/users/999"))
+                .willReturn(aResponse()
+                        .withStatus(404)
+                        .withBody("User not found")));
+
+        UserClient client = new UserClient(wm.getHttpBaseUrl());
+
+        assertThatThrownBy(() -> client.getUserOrThrow(999))
+                .isInstanceOf(UserNotFoundException.class)
+                .hasMessage("User with id 999 was not found");
+
+        verify(getRequestedFor(urlEqualTo("/users/999")));
+    }
+
+    @Test
+    void shouldThrowApiExceptionWhenServerReturnsError(WireMockRuntimeInfo wm) {
+        stubFor(get(urlEqualTo("/users/1"))
+                .willReturn(aResponse()
+                        .withStatus(500)
+                        .withBody("Internal Server Error")));
+
+        UserClient client = new UserClient(wm.getHttpBaseUrl());
+
+        assertThatThrownBy(() -> client.getUserOrThrow(1))
+                .isInstanceOf(ApiException.class)
+                .hasMessage("External API error: 500");
+
+        verify(getRequestedFor(urlEqualTo("/users/1")));
     }
 }

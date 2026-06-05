@@ -28,6 +28,22 @@ public class UserClient implements UserService {
         this.baseUrl = baseUrl;
     }
 
+    public User getUserOrThrow(int id) throws IOException, InterruptedException {
+        ApiResponse response = getUserResponseById(id);
+
+        if (response.getStatusCode() == 404) {
+            log.warn("User with id {} was not found", id);
+            throw new UserNotFoundException(id);
+        }
+
+        if (response.getStatusCode() >= 500) {
+            log.error("External API returned server error: {}", response.getStatusCode());
+            throw new ApiException("External API error: " + response.getStatusCode());
+        }
+
+        return objectMapper.readValue(response.getBody(), User.class);
+    }
+
     public String getUserById(int id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/" + id))
