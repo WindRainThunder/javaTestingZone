@@ -1,6 +1,8 @@
 package com.tcalik;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 public class UserManager {
 
@@ -18,5 +20,14 @@ public class UserManager {
 
     public String getDefaultDisplayName() {
         return "Unknown User";
+    }
+
+    public Optional<User> findUserById(
+            List<User> users,
+            int id
+    ) {
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst();
     }
 }
